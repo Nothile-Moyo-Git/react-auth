@@ -1,0 +1,12 @@
+@import '../../styles/Shared.scss';
+
+.starting{
+
+    margin: 3rem auto;
+    text-align: center;
+    animation: fade-in 100ms linear;
+
+    h1{
+        font-size: 5rem;
+    }
+}

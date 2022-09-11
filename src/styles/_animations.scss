@@ -1,7 +1,19 @@
-// Slowly increase opacity of the card
+// Fade in effect on element. Can be nice for things such as carts
 @keyframes fade-in{
     0%{ opacity: 0; }
     100%{ opacity: 1; }
+}
+
+// Slide up effect with opacity for rendering modals
+@keyframes slide-up{
+  0%{ 
+    top: 3rem;
+    opacity: 0;
+  }
+  100%{ 
+    top: 0rem;
+    opacity: 1;
+  }
 }
 
 // Change the gradient of the colors assuming the background size is big enough

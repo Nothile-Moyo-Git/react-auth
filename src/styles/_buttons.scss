@@ -1,0 +1,17 @@
+@import "./branding";
+
+button {
+    font: inherit;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    background-color: $gradient_color_one;
+    color: white;
+    border: 1px solid $gradient_color_one;
+    transition: all 0.15s linear;
+
+    @include state(){
+        background-color: $gradient_color_two;
+        border-color: $gradient_color_two;  
+    }
+}

@@ -1,9 +1,9 @@
 import ProfileForm from './ProfileForm';
-import classes from './UserProfile.module.css';
+import './UserProfile.scss';
 
 const UserProfile = () => {
   return (
-    <section className={classes.profile}>
+    <section className="profile">
       <h1>Your User Profile</h1>
       <ProfileForm />
     </section>

@@ -3,10 +3,12 @@
 
 * {
   box-sizing: border-box;
+  transition: $standard_transition;
 }
 
 html {
   height: 100%;
+  animation: fade-in 0.15s linear;
 }
 
 body {
@@ -19,4 +21,5 @@ body {
 h1, h2, h3, h4, h5, h6, p, a, label {
   font-family: 'Lato', sans-serif;
   color: white;
+  transition: all 0.15s linear;
 }
