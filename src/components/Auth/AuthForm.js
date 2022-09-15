@@ -1,14 +1,17 @@
 import { useState, useRef } from 'react';
 import './AuthForm.scss';
 import useHttp from '../../hooks/useHttp';
-import { signup } from '../../lib/api';
+import { signup, signin } from '../../lib/api';
 
 const AuthForm = () => {
   
-  const [isLogin, setIsLogin] = useState(true);
   const emailInputRef = useRef('');
   const passwordInputRef = useRef('');
-  const { sendRequest, status, data,  error } = useHttp(signup);
+  const { sendRequest: signUpUser } = useHttp(signup);
+  const { sendRequest : signInUser } = useHttp(signin);
+
+  const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -16,12 +19,15 @@ const AuthForm = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (isLogin === true) {
-
+      signInUser({email: emailInputRef.current.value, password: passwordInputRef.current.value});
     } else {
-      sendRequest({email: emailInputRef.current.value, password: passwordInputRef.current.value});
+      signUpUser({email: emailInputRef.current.value, password: passwordInputRef.current.value});
     }
+
+    setIsLoading(false);
   };
 
 
@@ -53,14 +59,17 @@ const AuthForm = () => {
         </div>
 
         <div className="actions">
-          <button>{isLogin ? 'Login' : 'Create Account'}</button>
+
+          { !isLoading && <button>{isLogin ? 'Login' : 'Create Account' }</button>  } 
+          { isLoading && <p>Loading...</p> }
           <button
             type='button'
             className="toggle"
             onClick={switchAuthModeHandler}
           >
-            {isLogin ? 'Create new account' : 'Login with existing account'}
+          {isLogin ? 'Create new account' : 'Login with existing account'}
           </button>
+
         </div>
 
       </form>
