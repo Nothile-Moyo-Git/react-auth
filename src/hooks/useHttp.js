@@ -61,9 +61,7 @@ function useHttp(requestFunction, startWithPending = false) {
 
   return {
     sendRequest,
-    status: api.status,
-    data: api.data,
-    error: api.error
+    ...api
   };
 }
 

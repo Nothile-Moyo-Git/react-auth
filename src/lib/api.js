@@ -1,5 +1,5 @@
 const API_KEY = 'AIzaSyAYXAdcf_s0BeI64VcVenlrX1CObah6frI';
-const FIREBASE_DOMAIN = 'https://react-auth-48dea-default-rtdb.europe-west1.firebasedatabase.app/';
+// const FIREBASE_DOMAIN = 'https://react-auth-48dea-default-rtdb.europe-west1.firebasedatabase.app/';
 const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
@@ -69,11 +69,8 @@ export const signin = async ({email, password}) => {
   const errorList = [`Warning!`];
 
   if (!response.ok) {
-    console.log('call failed');
-    console.log(data);
 
     let errorMessage = 'Authentication failed!';
-
 
     if (data && data.error && data.error.message) {
       
@@ -82,25 +79,24 @@ export const signin = async ({email, password}) => {
         let splice = error.message.split(' ');
         const message = splice[0];
 
-        if (message === 'WEAK_PASSWORD') {
+        if (message === 'INVALID_PASSWORD') {
           errorMessage = `Your password should be more than 6 letters`;
           errorList.push(errorMessage);
         }
 
-        if (message === 'EMAIL_EXISTS') {
-          errorMessage = `This email address already exists`;
+        if (message === 'EMAIL_NOT_FOUND') {
+          errorMessage = `Email address is not found`;
           errorList.push(errorMessage);
         }
 
       });
     }
 
-    return errorList;
+    console.log(errorList.join('\n'));
+
   }
 
   if (response.ok) {
-    console.log('call successful');
-    console.log(data);
     return data;
   }
 

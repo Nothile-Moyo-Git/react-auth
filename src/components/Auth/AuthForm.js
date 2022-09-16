@@ -7,8 +7,8 @@ const AuthForm = () => {
   
   const emailInputRef = useRef('');
   const passwordInputRef = useRef('');
-  const { sendRequest: signUpUser } = useHttp(signup);
-  const { sendRequest : signInUser } = useHttp(signin);
+  const { sendRequest : signUpUser } = useHttp(signup);
+  const { sendRequest : signInUser, data: userData, status: loginStatus, erorr, loginError } = useHttp(signin);
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,8 +28,17 @@ const AuthForm = () => {
     }
 
     setIsLoading(false);
+
   };
 
+  if (loginStatus === 'pending') {
+    console.log('Performing API call now. Please wait...');
+  }
+
+  if (loginStatus === 'completed') {
+    console.log('API call resolved, please check returned data...');
+    console.log(userData);
+  }
 
   return (
     <section className="auth">
