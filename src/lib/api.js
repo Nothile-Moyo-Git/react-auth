@@ -80,7 +80,7 @@ export const signin = async ({email, password}) => {
         const message = splice[0];
 
         if (message === 'INVALID_PASSWORD') {
-          errorMessage = `Your password should be more than 6 letters`;
+          errorMessage = `Please enter a valid password`;
           errorList.push(errorMessage);
         }
 

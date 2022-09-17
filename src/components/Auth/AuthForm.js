@@ -1,14 +1,15 @@
-import { useState, useRef } from 'react';
 import './AuthForm.scss';
 import useHttp from '../../hooks/useHttp';
+import { useState, useRef } from 'react';
 import { signup, signin } from '../../lib/api';
 
 const AuthForm = () => {
   
   const emailInputRef = useRef('');
   const passwordInputRef = useRef('');
+
   const { sendRequest : signUpUser } = useHttp(signup);
-  const { sendRequest : signInUser, data: userData, status: loginStatus, erorr, loginError } = useHttp(signin);
+  const { sendRequest : signInUser, data: userData, status: loginStatus } = useHttp(signin);
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
