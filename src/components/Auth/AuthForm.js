@@ -1,12 +1,14 @@
 import './AuthForm.scss';
 import useHttp from '../../hooks/useHttp';
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { signup, signin } from '../../lib/api';
+import AuthContext from '../../store/auth-context';
 
 const AuthForm = () => {
   
   const emailInputRef = useRef('');
   const passwordInputRef = useRef('');
+  const authContext = useContext(AuthContext);
 
   const { sendRequest : signUpUser } = useHttp(signup);
   const { sendRequest : signInUser, data: userData, status: loginStatus } = useHttp(signin);
@@ -19,6 +21,7 @@ const AuthForm = () => {
   };
 
   const submitHandler = (event) => {
+
     event.preventDefault();
     setIsLoading(true);
 
@@ -32,14 +35,17 @@ const AuthForm = () => {
 
   };
 
-  if (loginStatus === 'pending') {
-    console.log('Performing API call now. Please wait...');
-  }
+  useEffect(() => {
 
-  if (loginStatus === 'completed') {
-    console.log('API call resolved, please check returned data...');
-    console.log(userData);
-  }
+    if (loginStatus === 'pending') {
+
+    }
+  
+    if (loginStatus === 'completed') {
+      authContext.login(userData.idToken);
+    }
+  
+  },[loginStatus, authContext, userData]);
 
   return (
     <section className="auth">
@@ -69,17 +75,11 @@ const AuthForm = () => {
         </div>
 
         <div className="actions">
-
           { !isLoading && <button>{isLogin ? 'Login' : 'Create Account' }</button>  } 
           { isLoading && <p>Loading...</p> }
-          <button
-            type='button'
-            className="toggle"
-            onClick={switchAuthModeHandler}
-          >
+          <button type='button' className="toggle" onClick={switchAuthModeHandler}>
           {isLogin ? 'Create new account' : 'Login with existing account'}
           </button>
-
         </div>
 
       </form>
