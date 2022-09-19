@@ -102,3 +102,7 @@ export const signin = async ({email, password}) => {
 
 }
 
+export const changePassword = () => {
+
+}
+

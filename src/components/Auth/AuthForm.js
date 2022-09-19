@@ -32,7 +32,6 @@ const AuthForm = () => {
     }
 
     setIsLoading(false);
-
   };
 
   useEffect(() => {
