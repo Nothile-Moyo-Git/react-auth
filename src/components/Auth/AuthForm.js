@@ -40,7 +40,7 @@ const AuthForm = () => {
 
     }
   
-    if (loginStatus === 'completed') {
+    if (loginStatus === 'completed' && (typeof(userData) !== 'undefined')) {
       authContext.login(userData.idToken);
     }
   

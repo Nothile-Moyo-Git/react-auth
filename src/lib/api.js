@@ -2,6 +2,7 @@ const API_KEY = 'AIzaSyAYXAdcf_s0BeI64VcVenlrX1CObah6frI';
 // const FIREBASE_DOMAIN = 'https://react-auth-48dea-default-rtdb.europe-west1.firebasedatabase.app/';
 const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
+const CHANGE_PASSWORD_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
 
 export async function signup({email, password}) {
   
@@ -102,7 +103,35 @@ export const signin = async ({email, password}) => {
 
 }
 
-export const changePassword = () => {
+export const changePassword = async ({idToken, password: newPassword, returnSecureToken}) => {
+
+
+  console.log(idToken);
+
+  if (idToken != null) {
+
+    const response = await fetch(CHANGE_PASSWORD_URL,{
+      method: 'POST',
+      body: JSON.stringify({
+        idToken: idToken,
+        password: newPassword,
+        returnSecureToken: returnSecureToken
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    console.log(`Password update completed`);
+    console.log(`Showing response object below, please observe...`);
+    console.log( response, '\n' );
+
+    console.log(`Showing data object below, please obverse...`);
+    console.log( data, '\n\n' );
+
+  }
 
 }
 
