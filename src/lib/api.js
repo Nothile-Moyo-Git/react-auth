@@ -98,15 +98,13 @@ export const signin = async ({email, password}) => {
   }
 
   if (response.ok) {
+    console.log('Successfully logged in...');
     return data;
   }
 
 }
 
 export const changePassword = async ({idToken, password: newPassword, returnSecureToken}) => {
-
-
-  console.log(idToken);
 
   if (idToken != null) {
 
@@ -122,14 +120,13 @@ export const changePassword = async ({idToken, password: newPassword, returnSecu
       }
     });
 
-    const data = await response.json();
+    if (!response.ok) {
+      throw new Error('Password reset call failed');
+    }
 
-    console.log(`Password update completed`);
-    console.log(`Showing response object below, please observe...`);
-    console.log( response, '\n' );
-
-    console.log(`Showing data object below, please obverse...`);
-    console.log( data, '\n\n' );
+    if (response.ok) {
+      console.log('Password reset successful...');
+    }
 
   }
 
