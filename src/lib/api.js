@@ -120,6 +120,8 @@ export const changePassword = async ({idToken, password: newPassword, returnSecu
       }
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
       throw new Error('Password reset call failed');
     }
@@ -127,6 +129,8 @@ export const changePassword = async ({idToken, password: newPassword, returnSecu
     if (response.ok) {
       console.log('Password reset successful...');
     }
+
+    return data;
 
   }
 

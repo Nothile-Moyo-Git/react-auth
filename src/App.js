@@ -13,6 +13,7 @@ function App() {
   const authContext = useContext(AuthContext);
 
   const isLoggedIn = authContext.isLoggedIn;
+  console.log(`You are currently${isLoggedIn === true ? '' : ' not'} logged in.`);
 
   return (
     <Layout>
@@ -23,11 +24,11 @@ function App() {
         </Route>
 
         <Route exact path='/auth'>
-          { isLoggedIn === true ? <Redirect to="/profile"/> : <AuthPage /> }
+          { isLoggedIn === true ? <Redirect to="/profile"/> : <AuthPage/> }
         </Route>
 
         <Route exact path='/profile'>
-          <UserProfile />
+          { isLoggedIn === true ? <UserProfile/> : <Redirect to="/auth"/> }
         </Route>
         
         <Redirect from="/*" to="/"/>

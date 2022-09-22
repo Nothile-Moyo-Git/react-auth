@@ -35,10 +35,6 @@ const AuthForm = () => {
   };
 
   useEffect(() => {
-
-    if (loginStatus === 'pending') {
-
-    }
   
     if (loginStatus === 'completed' && (typeof(userData) !== 'undefined')) {
       authContext.login(userData.idToken);

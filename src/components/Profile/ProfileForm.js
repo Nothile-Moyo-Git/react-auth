@@ -9,15 +9,15 @@ const ProfileForm = () => {
 
   const { sendRequest, status, data } = useHttp(changePassword);
   const passwordRef = useRef('');
+  const history = useHistory();
 
   const authContext = useContext(AuthContext);
-
 
   const submitFormHandler = (event) => {
     event.preventDefault();
 
     sendRequest({ idToken: authContext.token, password: passwordRef.current.value, returnSecureToken: true });
- 
+    history.replace('/');
   }
 
   useEffect(() => {
