@@ -4,7 +4,8 @@ import UserProfile from './components/Profile/UserProfile';
 import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
 import AuthContext from './store/auth-context';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import React from 'react';
 import './App.scss';
 
 function App() {
@@ -13,7 +14,18 @@ function App() {
   const authContext = useContext(AuthContext);
 
   const isLoggedIn = authContext.isLoggedIn;
+
   console.log(`You are currently${isLoggedIn === true ? '' : ' not'} logged in.`);
+
+  useEffect(() => {
+    console.log('app loaded');
+    const date = new Date();
+    date.setDate(date.getDate() + 2 * 7);
+    const utcDate = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+    const expiryDate = new Date(utcDate).toUTCString();
+
+    
+  });
 
   return (
     <Layout>
@@ -31,10 +43,11 @@ function App() {
           { isLoggedIn === true ? <UserProfile/> : <Redirect to="/auth"/> }
         </Route>
         
-        <Redirect from="/*" to="/"/>
+        <Redirect from="*" to="/"/>
+
       </Switch>
     </Layout>
   );
 }
 
-export default App;
+export default React.memo(App);
