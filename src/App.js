@@ -12,19 +12,36 @@ function App() {
 
   // Check if we're already logged in 
   const authContext = useContext(AuthContext);
-
   const isLoggedIn = authContext.isLoggedIn;
+  const token = authContext.token;
+  const login = authContext.login;
 
   console.log(`You are currently${isLoggedIn === true ? '' : ' not'} logged in.`);
 
   useEffect(() => {
-    console.log('app loaded');
+
+    // Get our current date, add 2 weeks to it and then convert it to UTC time for cookie generation to persist logins
     const date = new Date();
     date.setDate(date.getDate() + 2 * 7);
     const utcDate = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     const expiryDate = new Date(utcDate).toUTCString();
 
-    
+    if ( document.cookie ) {
+      const cookie = document.cookie.split('=');
+      const currentDate = new Date().toUTCString();
+      console.log(cookie);
+
+      if(currentDate > cookie[2]){
+
+      }
+      // login(cookie[1]);
+
+    }
+
+    if ( typeof(token) === 'string') {
+      document.cookie = `token=${token}, expires=${expiryDate}, path=/`;
+    }
+
   });
 
   return (
