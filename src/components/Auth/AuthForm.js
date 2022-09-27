@@ -37,7 +37,12 @@ const AuthForm = () => {
   useEffect(() => {
   
     if (loginStatus === 'completed' && (typeof(userData) !== 'undefined')) {
-      authContext.login(userData.idToken);
+      
+      const expirationDate = new Date(
+        new Date().getTime() + userData.expiresIn * 1000
+      );
+
+      authContext.login(userData.idToken, expirationDate);
     }
   
   },[loginStatus, authContext, userData]);
