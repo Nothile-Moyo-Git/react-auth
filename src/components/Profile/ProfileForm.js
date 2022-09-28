@@ -8,7 +8,10 @@ import { useHistory } from 'react-router-dom';
 const ProfileForm = () => {
 
   const { sendRequest, status, data } = useHttp(changePassword);
+
   const passwordRef = useRef('');
+  const emailRef = useRef('');
+
   const history = useHistory();
 
   const authContext = useContext(AuthContext);
@@ -28,6 +31,14 @@ const ProfileForm = () => {
     <form className="form" onSubmit={submitFormHandler}>
 
       <div className="control">
+        <label htmlFor=''>New Email Address</label>
+        <input
+          type='email'
+          id='new-email'
+          autoComplete='on'
+          placeHolder="Please enter your new email address"
+          ref={emailRef}
+        />
         <label htmlFor='new-password'>New Password</label>
         <input 
           type='password' 

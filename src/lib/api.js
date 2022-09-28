@@ -1,11 +1,11 @@
 const API_KEY = 'AIzaSyAYXAdcf_s0BeI64VcVenlrX1CObah6frI';
-// const FIREBASE_DOMAIN = 'https://react-auth-48dea-default-rtdb.europe-west1.firebasedatabase.app/';
 const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 const CHANGE_PASSWORD_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
 
 export async function signup({email, password}) {
   
+  // Send a signup call to the signup url for firebase
   const response = await fetch(`${SIGNUP_URL}`,{
     method: 'POST',
     body: JSON.stringify({
