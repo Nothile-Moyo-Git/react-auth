@@ -2,6 +2,7 @@ const API_KEY = 'AIzaSyAYXAdcf_s0BeI64VcVenlrX1CObah6frI';
 const SIGNUP_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 const SIGNIN_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 const CHANGE_PASSWORD_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
+const CHANGE_EMAIL_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
 
 export async function signup({email, password}) {
   
@@ -108,7 +109,7 @@ export const changePassword = async ({idToken, password: newPassword, returnSecu
 
   if (idToken != null) {
 
-    const response = await fetch(CHANGE_PASSWORD_URL,{
+    const password = await fetch(CHANGE_PASSWORD_URL,{
       method: 'POST',
       body: JSON.stringify({
         idToken: idToken,
@@ -120,19 +121,42 @@ export const changePassword = async ({idToken, password: newPassword, returnSecu
       }
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error('Password reset call failed');
+    if (!password.ok) {
+      alert(`Password update failed, please try again...`);
     }
 
-    if (response.ok) {
-      console.log('Password reset successful...');
+    if (password.ok) {
+      console.log('Password changed successful...');
     }
-
-    return data;
 
   }
 
 }
 
+export const changeEmail = async ({idToken, email: newEmail, returnSecureToken}) => {
+
+  if (idToken != null) {
+
+    const email = await fetch(CHANGE_EMAIL_URL,{
+      method: 'POST',
+      body: JSON.stringify({
+        idToken: idToken,
+        email: newEmail,
+        returnSecureToken: returnSecureToken
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!email.ok) {
+      alert(`Email update failed, please try again...`);
+    }
+
+    if (email.ok) {
+      console.log('Email address changed successfullu...');
+    }
+
+  }
+
+}
