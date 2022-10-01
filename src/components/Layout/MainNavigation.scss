@@ -3,13 +3,13 @@
 .header {
     width: 100%;
     height: 5rem;
-    background-color: $gradient_color_one;
+    background: $purple_gradient;
     box-shadow: $box_shadow;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10%;
-    animation: fade-in 100ms linear;
+    animation: gradient 4s linear;
 
     ul {
         list-style: none;
@@ -45,7 +45,6 @@
 
         @include state(){
             background-color: $gradient_color_three;
-            color: $gradient_color_one;
         }
     }
 }

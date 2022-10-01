@@ -94,7 +94,7 @@ export const signin = async ({email, password}) => {
       });
     }
 
-    console.log(errorList.join('\n'));
+    alert(errorList.join('\n'));
 
   }
 
@@ -133,15 +133,16 @@ export const changePassword = async ({idToken, password: newPassword, returnSecu
 
 }
 
-export const changeEmail = async ({idToken, email: newEmail, returnSecureToken}) => {
+export const updateAccountInformation = async ({idToken, email: newEmail, password: newPassword, returnSecureToken}) => {
 
   if (idToken != null) {
 
-    const email = await fetch(CHANGE_EMAIL_URL,{
+    const response = await fetch(CHANGE_EMAIL_URL,{
       method: 'POST',
       body: JSON.stringify({
         idToken: idToken,
         email: newEmail,
+        password: newPassword,
         returnSecureToken: returnSecureToken
       }),
       headers: {
@@ -149,12 +150,12 @@ export const changeEmail = async ({idToken, email: newEmail, returnSecureToken})
       }
     });
 
-    if (!email.ok) {
-      alert(`Email update failed, please try again...`);
+    if (!response.ok) {
+      alert(`Content update failed, please check api calls...`);
     }
 
-    if (email.ok) {
-      console.log('Email address changed successfullu...');
+    if (response.ok) {
+      console.log('Content update was successful...');
     }
 
   }

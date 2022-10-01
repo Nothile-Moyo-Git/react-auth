@@ -9,5 +9,9 @@ $gradient_color_three : #c291e2;
 $gradient_color_four : #9f5ccc;
 $gradient_color_five : #873abb;
 $gradient_color_six : #ae82cc;
+$gradient_color_seven: #5F0A87;
+$gradient_color_eight: #A4508B;
 
 $box_shadow : ( 0px 0px 20px 0px rgba(0,0,0,0.4) );
+
+$purple_gradient : linear-gradient(60deg, $gradient_color_one, $gradient_color_two, $gradient_color_seven);

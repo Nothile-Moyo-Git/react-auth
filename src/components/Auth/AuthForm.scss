@@ -5,11 +5,12 @@
   width: 95%;
   max-width: 25rem;
   border-radius: 6px;
-  background-color: $gradient_color_one;
+  background: $purple_gradient;
+  background-size: 400% 400%;
   box-shadow: $box_shadow;
   padding: 1rem;
   text-align: center;
-  animation: slide-up 0.075s linear;
+  animation: gradient 4s linear;
   position: relative;
   color: white;
 
@@ -67,13 +68,12 @@
   .toggle{
     margin-top: 1rem;
     background-color: transparent;
-    color: $gradient_color_four;
-    border: none;
+    color: white;
+    border: 1px solid $gradient_color_four;
     padding: 0.15rem 1.5rem;
 
     @include state(){
       background-color: transparent;
-      color: $gradient_color_six;
     }
   }
 }
